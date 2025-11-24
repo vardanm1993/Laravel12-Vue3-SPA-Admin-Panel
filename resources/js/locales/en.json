@@ -1,0 +1,8 @@
+{
+    "app": {
+        "title": "Admin Panel",
+        "welcome": "Welcome to the admin panel",
+        "language": "Language",
+        "home": "Home"
+    }
+}

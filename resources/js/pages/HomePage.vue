@@ -1,11 +1,21 @@
 <script setup>
+import {useI18n} from 'vue-i18n'
 
+const {t} = useI18n()
 </script>
 
 <template>
-    <h1 class="text-3xl font-bold text-red-600">
-        Vue + Laravel SPA works! 🚀
-    </h1>
+    <main class="min-h-screen flex flex-col items-center justify-center gap-6">
+        <h1 class="text-3xl font-bold">
+            {{ t('app.title') }}
+        </h1>
+
+        <p class="text-gray-600">
+            {{ t('app.welcome') }}
+        </p>
+
+        <LanguageSwitcher/>
+    </main>
 </template>
 
 <style scoped>
