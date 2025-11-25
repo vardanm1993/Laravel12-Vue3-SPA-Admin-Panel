@@ -8,7 +8,11 @@ const routes = [
     {
         path: '/ui-test',
         component: () => import('@/pages/UiTestPage.vue')
-    }
+    },
+    {
+        path: '/api-test',
+        component: () => import('@/pages/ApiTestPage.vue')
+    },
 
 ]
 
