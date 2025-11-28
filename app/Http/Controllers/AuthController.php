@@ -35,6 +35,10 @@ class AuthController extends Controller
             'password' => bcrypt($validated['password']),
         ]);
 
+        Auth::guard('web')->login($user);
+
+        $request->session()->regenerate();
+
         return response()->json([
             'message' => 'User registered successfully!',
             'user' => $user,
