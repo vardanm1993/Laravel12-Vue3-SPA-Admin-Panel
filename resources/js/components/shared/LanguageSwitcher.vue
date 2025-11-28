@@ -1,5 +1,5 @@
 <script setup>
-import { useLocale } from '@/composables/useLocale'
+import { useLocale } from '@/composables/useLocale.js'
 const { currentLocale, availableLocales, setLocale } = useLocale()
 </script>
 

@@ -3,6 +3,39 @@
         "title": "Admin Panel",
         "welcome": "Welcome to the admin panel",
         "language": "Language",
-        "home": "Home"
+        "home": "Home",
+        "dashboard": "Dashboard"
+    },
+    "auth": {
+        "login": "Login",
+        "register": "Register",
+        "logout": "Logout",
+        "email": "Email",
+        "name": "Name",
+        "password": "Password",
+        "password_confirm": "Confirm password",
+        "forgot": "Forgot password?",
+        "remember": "Remember me",
+        "no_account": "Don't have an account?",
+        "have_account": "Already have an account?"
+    },
+    "buttons": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "save": "Save",
+        "back": "Back"
+    },
+    "validation": {
+        "required": "This field is required",
+        "email": "Invalid email format",
+        "password_match": "Passwords must match",
+        "min": "Must be at least {count} characters"
+    },
+    "messages": {
+        "invalid_credentials": "Invalid email or password",
+        "server_error": "Server error. Try again later",
+        "success_register": "Registration successful!"
     }
 }

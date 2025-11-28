@@ -11,8 +11,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    LanguageSwitcher: typeof import('./resources/js/components/LanguageSwitcher.vue')['default']
+    Button: typeof import('./resources/js/components/Ui/Button.vue')['default']
+    Input: typeof import('./resources/js/components/Ui/Input.vue')['default']
+    LanguageSwitcher: typeof import('./resources/js/components/shared/LanguageSwitcher.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UiButton: typeof import('./resources/js/components/ui/UiButton.vue')['default']
+    UiInput: typeof import('./resources/js/components/ui/UiInput.vue')['default']
   }
 }

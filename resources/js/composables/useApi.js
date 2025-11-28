@@ -26,5 +26,20 @@ export function useApi() {
         }
     }
 
-    return {request, loading, error}
+    const get    = (url, params = null) => request("GET", url, { params })
+    const post   = (url, data)          => request("POST", url, data)
+    const put    = (url, data)          => request("PUT", url, data)
+    const patch  = (url, data)          => request("PATCH", url, data)
+    const del    = (url)                => request("DELETE", url)
+
+    return {
+        request,
+        get,
+        post,
+        put,
+        patch,
+        del,
+        loading,
+        error
+    }
 }

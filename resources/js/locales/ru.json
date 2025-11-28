@@ -3,6 +3,39 @@
         "title": "Админ панель",
         "welcome": "Добро пожаловать в админ панель",
         "language": "Язык",
-        "home": "Главная"
+        "home": "Главная",
+        "dashboard": "Панель"
+    },
+    "auth": {
+        "login": "Войти",
+        "register": "Регистрация",
+        "logout": "Выйти",
+        "email": "Эл. почта",
+        "name": "Имя",
+        "password": "Пароль",
+        "password_confirm": "Подтверждение пароля",
+        "forgot": "Забыли пароль?",
+        "remember": "Запомнить меня",
+        "no_account": "Нет аккаунта?",
+        "have_account": "Уже есть аккаунт?"
+    },
+    "buttons": {
+        "submit": "Отправить",
+        "cancel": "Отмена",
+        "delete": "Удалить",
+        "edit": "Редактировать",
+        "save": "Сохранить",
+        "back": "Назад"
+    },
+    "validation": {
+        "required": "Обязательное поле",
+        "email": "Некорректный email",
+        "password_match": "Пароли должны совпадать",
+        "min": "Должно быть не менее {count} символов"
+    },
+    "messages": {
+        "invalid_credentials": "Неверный email или пароль",
+        "server_error": "Ошибка сервера. Попробуйте позже",
+        "success_register": "Регистрация успешна!"
     }
 }
