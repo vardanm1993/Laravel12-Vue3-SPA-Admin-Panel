@@ -1,0 +1,68 @@
+{
+    "app": {
+        "title": "Admin Panel",
+        "welcome": "Welcome to the admin panel",
+        "language": "Language"
+    },
+
+    "nav": {
+        "home": "Home",
+        "dashboard": "Dashboard"
+    },
+
+    "fields": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "password_confirmation": "Confirm password",
+        "title": "Title",
+        "color": "Color",
+        "description": "Description"
+    },
+
+    "auth": {
+        "login": "Login",
+        "register": "Register",
+        "logout": "Logout",
+        "remember": "Remember me",
+        "forgot": "Forgot password?",
+        "no_account": "Don't have an account?",
+        "have_account": "Already have an account?"
+    },
+
+    "buttons": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "save": "Save",
+        "back": "Back",
+        "continue": "Continue",
+        "close": "Close"
+    },
+
+    "messages": {
+        "invalid_credentials": "Invalid email or password",
+        "login_success": "Login successful!",
+        "logout_success": "You have logged out.",
+        "success_register": "Registration successful!",
+        "server_error": "Server error. Try again later",
+        "bad_request": "Bad request.",
+        "unauthorized": "Unauthorized.",
+        "not_found": "Resource not found.",
+        "unknown_error": "Unknown error."
+    },
+
+    "validation": {
+        "failed": "Validation error.",
+        "string": "{attribute} must be a string.",
+        "accepted": "{attribute} must be accepted.",
+        "email": "{attribute} must be a valid email address.",
+        "required": "{attribute} is required.",
+        "min": "{attribute} must be at least {min} characters.",
+        "max": "{attribute} must not be greater than {max} characters.",
+        "unique": "This {attribute} is already taken.",
+        "confirmed": "{attribute} confirmation does not match.",
+        "password_match": "Passwords must match."
+    }
+}

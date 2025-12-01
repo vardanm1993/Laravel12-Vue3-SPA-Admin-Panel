@@ -1,0 +1,68 @@
+{
+    "app": {
+        "title": "Ադմին Պանել",
+        "welcome": "Բարի գալուստ ադմին պանել",
+        "language": "Լեզու"
+    },
+
+    "nav": {
+        "home": "Գլխավոր",
+        "dashboard": "Վահանակ"
+    },
+
+    "fields": {
+        "name": "Անուն",
+        "email": "Էլ. փոստ",
+        "password": "Գաղտնաբառ",
+        "password_confirmation": "Գաղտնաբառի հաստատում",
+        "title": "Վերնագիր",
+        "color": "Ներկ",
+        "description": "Նկարագրություն"
+    },
+
+    "auth": {
+        "login": "Մուտք",
+        "register": "Գրանցում",
+        "logout": "Դուրս գալ",
+        "remember": "Հիշել ինձ",
+        "forgot": "Մոռացե՞լ եք գաղտնաբառը",
+        "no_account": "Չունե՞ք հաշիվ",
+        "have_account": "Արդեն ունե՞ք հաշիվ"
+    },
+
+    "buttons": {
+        "submit": "Ուղարկել",
+        "cancel": "Չեղարկել",
+        "delete": "Ջնջել",
+        "edit": "Խմբագրել",
+        "save": "Պահպանել",
+        "back": "Վերադառնալ",
+        "continue": "Շարունակել",
+        "close": "Փակել"
+    },
+
+    "messages": {
+        "invalid_credentials": "Սխալ email կամ գաղտնաբառ",
+        "login_success": "Մուտքն հաջողվեց!",
+        "logout_success": "Դուք դուրս եկաք համակարգից։",
+        "success_register": "Գրանցումն ավարտված է!",
+        "server_error": "Սերվերի սխալ։ Խնդրում ենք փորձել ուշ։",
+        "bad_request": "Սխալ հարցում։",
+        "unauthorized": "Թույլատրելի չէ։",
+        "not_found": "Ռեսուրսը չի գտնվել։",
+        "unknown_error": "Անհայտ սխալ։"
+    },
+
+    "validation": {
+        "failed": "Վավերացման սխալ։",
+        "string": "{attribute}-ը պետք է լինի տեքստ։",
+        "accepted": "{attribute}-ը պետք է ընդունվի։",
+        "email": "{attribute}-ը պետք է լինի վավեր email հասցե։",
+        "required": "{attribute} դաշտը պարտադիր է։",
+        "min": "{attribute}-ը պետք է լինի առնվազն {min} նիշ։",
+        "max": "{attribute}-ը պետք է չի գերազանցի {max} նիշը։",
+        "unique": "{attribute}-ը արդեն օգտագործվում է։",
+        "confirmed": "{attribute}-ի հաստատումը չի համապատասխանում։",
+        "password_match": "Գաղտնաբառերը պետք է համընկնեն։"
+    }
+}

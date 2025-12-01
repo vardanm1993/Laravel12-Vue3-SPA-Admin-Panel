@@ -1,27 +1,26 @@
-import {createI18n} from "vue-i18n";
-import en from "@/locales/en.json";
-import ru from "@/locales/ru.json";
-import am from "@/locales/am.json"
+import { createI18n } from 'vue-i18n'
 
 const DEFAULT_LOCALE = 'en'
 
 function loadLocaleFromStorage() {
     if (typeof window === 'undefined') return DEFAULT_LOCALE
     const saved = window.localStorage.getItem('locale')
-    if (!saved) return DEFAULT_LOCALE
     return ['en', 'ru', 'am'].includes(saved) ? saved : DEFAULT_LOCALE
 }
+
+const localeFiles = import.meta.glob('/lang/*.json', { eager: true })
+
+const messages = Object.entries(localeFiles).reduce((acc, [path, module]) => {
+    const locale = path.split('/').pop().replace('.json', '')
+    acc[locale] = module.default
+    return acc
+}, {})
 
 export const i18n = createI18n({
     legacy: false,
     locale: loadLocaleFromStorage(),
     fallbackLocale: 'en',
-    messages: {
-        en,
-        ru,
-        am
-    }
-
+    messages,
 })
 
 export function setLocale(locale) {

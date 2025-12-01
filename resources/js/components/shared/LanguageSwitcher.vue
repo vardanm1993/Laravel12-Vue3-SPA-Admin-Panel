@@ -1,6 +1,6 @@
 <script setup>
 import { useLocale } from '@/composables/useLocale.js'
-const { currentLocale, availableLocales, setLocale } = useLocale()
+const { currentLocale, availableLocales, changeLocale} = useLocale()
 </script>
 
 <template>
@@ -8,7 +8,7 @@ const { currentLocale, availableLocales, setLocale } = useLocale()
         <select
             class="border px-3 py-2 rounded bg-white shadow-sm"
             :value="currentLocale"
-            @change="setLocale($event.target.value)"
+            @change="changeLocale($event.target.value)"
         >
             <option
                 v-for="l in availableLocales"

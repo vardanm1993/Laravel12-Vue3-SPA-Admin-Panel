@@ -1,13 +1,17 @@
-import {defineStore} from "pinia";
-import {useAuthApi} from "@/composables/useAuthApi.js";
-import {ref} from "vue";
+import {defineStore} from 'pinia'
+import {useAuthApi} from '@/composables/useAuthApi.js'
+import {ref} from 'vue'
+import {useErrorStore} from "@/stores/error.store.js";
+import {useFlashRedirect} from "@/composables/useFlashRedirect.js";
 
 export const useAuthStore = defineStore('auth', () => {
     const user = ref(null)
     const loading = ref(false)
-    const error = ref(null)
 
     const api = useAuthApi()
+    const errors = useErrorStore()
+
+    const {flashAndRedirect} = useFlashRedirect()
 
     async function getUser() {
         try {
@@ -19,14 +23,14 @@ export const useAuthStore = defineStore('auth', () => {
 
     async function login(payload) {
         loading.value = true
-        error.value = null
+        errors.clearErrors()
 
         try {
             await api.csrf()
-            await api.login(payload)
+            const res = await api.login(payload)
             await getUser()
+            flashAndRedirect('admin.dashboard', res.message_key || 'messages.login_success')
         } catch (err) {
-            error.value = err.response?.data?.message || 'Login failed'
         } finally {
             loading.value = false
         }
@@ -34,18 +38,14 @@ export const useAuthStore = defineStore('auth', () => {
 
     async function register(payload) {
         loading.value = true
-        error.value = null
+        errors.clearErrors()
 
         try {
             await api.csrf()
-            await api.register(payload)
-            await api.login({
-                email: payload.email,
-                password: payload.password,
-            })
+            const res = await api.register(payload)
             await getUser()
-        } catch (err) {
-            error.value = err.response?.data?.message || 'Register failed'
+            flashAndRedirect('admin.dashboard', res.message_key || 'messages.login_success')
+        }catch (err){
         } finally {
             loading.value = false
         }
@@ -57,12 +57,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     return {
-        user,
-        loading,
-        error,
-        getUser,
-        login,
-        register,
-        logout
+        user, loading,
+        getUser, login, register, logout
     }
 })
