@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import {useAuthStore} from '@/stores/auth.store.js'
+import {useToastStore} from "@/stores/toast.store.js";
 
 const routes = [
     {path: '/', component: () => import('@/pages/HomePage.vue')},

@@ -13,16 +13,17 @@ class AuthController extends Controller
     public function login(LoginRequest $request): JsonResponse
     {
         if (!Auth::guard('web')->attempt($request->validated())) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return response()->json([
+                'message_key' => 'messages.invalid_credentials',
+            ], 401);
         }
 
         $request->session()->regenerate();
 
         return response()->json([
-            'message' => 'Login successful',
+            'message_key' => 'messages.login_success',
             'user' => Auth::user(),
         ]);
-
     }
 
     public function register(RegisterRequest $request): JsonResponse
@@ -36,11 +37,10 @@ class AuthController extends Controller
         ]);
 
         Auth::guard('web')->login($user);
-
         $request->session()->regenerate();
 
         return response()->json([
-            'message' => 'User registered successfully!',
+            'message_key' => 'messages.success_register',
             'user' => $user,
         ], 201);
     }
@@ -51,6 +51,8 @@ class AuthController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return response()->json(['message' => 'Logged out'], 200);
+        return response()->json([
+            'message_key' => 'messages.logout_success',
+        ]);
     }
 }
