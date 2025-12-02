@@ -95,7 +95,7 @@ const onSubmit = handleSubmit(async (values) => {
             :loading="auth.loading"
             class="w-full mt-2"
         >
-            {{ t('buttons.register') }}
+            {{ t('auth.register') }}
         </UiButton>
     </form>
 </template>

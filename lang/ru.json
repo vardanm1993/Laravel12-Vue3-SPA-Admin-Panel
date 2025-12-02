@@ -5,6 +5,15 @@
         "language": "Language"
     },
 
+    "admin": {
+        "panel": "Админ Панель",
+        "dashboard": "Дашборд",
+        "products": "Товары",
+        "categories": "Категории",
+        "users": "Пользователи",
+        "logout": "Выйти"
+    },
+
     "nav": {
         "home": "Home",
         "dashboard": "Dashboard"

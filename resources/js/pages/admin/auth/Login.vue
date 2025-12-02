@@ -62,7 +62,7 @@ const onSubmit = handleSubmit(async (values) => {
         </Field>
 
         <UiButton type="submit" :loading="auth.loading" class="w-full mt-2">
-            {{ t('fields.login') }}
+            {{ t('auth.login') }}
         </UiButton>
     </form>
 </template>
