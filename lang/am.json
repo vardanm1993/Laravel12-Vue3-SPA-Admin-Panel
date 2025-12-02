@@ -5,6 +5,15 @@
         "language": "Լեզու"
     },
 
+    "admin": {
+        "panel": "Ադմին Վահանակ",
+        "dashboard": "Վահանակ",
+        "products": "Արտադրանքներ",
+        "categories": "Կատեգորիաներ",
+        "users": "Օգտատերեր",
+        "logout": "Ելք"
+    },
+
     "nav": {
         "home": "Գլխավոր",
         "dashboard": "Վահանակ"

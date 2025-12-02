@@ -5,6 +5,15 @@
         "language": "Language"
     },
 
+    "admin": {
+        "panel": "Admin Panel",
+        "dashboard": "Dashboard",
+        "products": "Products",
+        "categories": "Categories",
+        "users": "Users",
+        "logout": "Logout"
+    },
+
     "nav": {
         "home": "Home",
         "dashboard": "Dashboard"
