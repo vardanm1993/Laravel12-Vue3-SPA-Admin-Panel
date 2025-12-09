@@ -12,19 +12,29 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request): JsonResponse
     {
-        if (!Auth::guard('web')->attempt($request->validated())) {
+        $validated = $request->validated();
+
+        $credentials = [
+            'email' => $validated['email'],
+            'password' => $validated['password'],
+        ];
+
+        $remember = $validated['remember'] ?? false;
+
+        if (!Auth::guard('web')->attempt($credentials, $remember)) {
             return response()->json([
-                'message_key' => 'messages.invalid_credentials',
+                'message_key' => 'auth.invalid_credentials',
             ], 401);
         }
 
         $request->session()->regenerate();
 
         return response()->json([
-            'message_key' => 'messages.login_success',
+            'message_key' => 'auth.login_success',
             'user' => Auth::user(),
         ]);
     }
+
 
     public function register(RegisterRequest $request): JsonResponse
     {
@@ -34,16 +44,21 @@ class AuthController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
+            'role' => $validated['role'] ?? 'user',
         ]);
 
-        Auth::guard('web')->login($user);
+        $remember = $validated['remember'] ?? false;
+
+        Auth::guard('web')->login($user, $remember);
+
         $request->session()->regenerate();
 
         return response()->json([
-            'message_key' => 'messages.success_register',
+            'message_key' => 'auth.success_register',
             'user' => $user,
         ], 201);
     }
+
 
     public function logout(): JsonResponse
     {

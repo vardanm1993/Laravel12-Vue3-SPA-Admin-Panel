@@ -38,6 +38,24 @@ const router = createRouter({
                     name: 'admin.dashboard',
                     component: () => import('@/pages/admin/Dashboard.vue'),
                     meta: { requiresAuth: true, title: 'admin.dashboard' },
+                },
+                {
+                    path: 'profile',
+                    name: 'admin.profile',
+                    component: () => import('@/pages/admin/profile/ProfilePage.vue'),
+                    meta: { requiresAuth: true, title: 'admin.profile_page.title' },
+                },
+                {
+                    path: 'profile/password',
+                    name: 'admin.profile.password',
+                    component: () => import('@/pages/admin/profile/ChangePasswordPage.vue'),
+                    meta: { requiresAuth: true, title: 'admin.password_page.title' },
+                },
+                {
+                    path: 'profile/delete',
+                    name: 'admin.profile.delete',
+                    component: () => import('@/pages/admin/profile/DeleteAccountPage.vue'),
+                    meta: { requiresAuth: true, title: 'admin.delete_page.title' },
                 }
             ]
         },

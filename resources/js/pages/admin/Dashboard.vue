@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth.store.js'
 import { useToastStore } from '@/stores/toast.store.js'
 import { onMounted, ref } from 'vue'
+import UiButton from "@/components/ui/UiButton.vue";
 
 const { t } = useI18n()
 const auth = useAuthStore()

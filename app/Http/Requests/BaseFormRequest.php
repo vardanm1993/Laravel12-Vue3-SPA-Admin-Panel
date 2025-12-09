@@ -12,11 +12,34 @@ class BaseFormRequest extends FormRequest
     {
         $errors = [];
 
-        foreach ($validator->failed() as $field => $failures) {
-            foreach ($failures as $rule => $params) {
+        $failed   = $validator->failed();
+        $messages = $validator->errors()->messages();
+
+        foreach ($messages as $field => $fieldMessages) {
+
+            foreach ($fieldMessages as $msg) {
+
+                if (str_starts_with($msg, 'validation.')) {
+
+                    $errors[$field][] = [
+                        'message_key' => $msg,
+                        'params'      => [
+                            'attribute' => $field,
+                        ],
+                    ];
+
+                    continue;
+                }
+
+                $rule   = array_key_first($failed[$field] ?? []) ?? 'failed';
+                $params = $failed[$field][$rule] ?? [];
+
                 $errors[$field][] = [
-                    'message_key' => $this->getMessageKey($rule),
-                    'params'      => $this->extractParams($params, $field, $rule),
+                    'message_key' => $this->mapRuleToKey($rule),
+                    'params'      => array_merge(
+                        ['attribute' => $field],
+                        $params
+                    ),
                 ];
             }
         }
@@ -29,40 +52,31 @@ class BaseFormRequest extends FormRequest
         );
     }
 
-    protected function getMessageKey(string $rule): string
+    protected function mapRuleToKey(string $rule): string
     {
         return match (strtolower($rule)) {
-            'min'       => 'validation.min',
-            'max'       => 'validation.max',
-            'unique'    => 'validation.unique',
-            'confirmed' => 'validation.confirmed',
-            default     => "validation.$rule",
+            'required'     => 'validation.required',
+            'email'        => 'validation.email',
+            'string'       => 'validation.string',
+            'min'          => 'validation.min',
+            'max'          => 'validation.max',
+            'between'      => 'validation.between',
+            'unique'       => 'validation.unique',
+            'exists'       => 'validation.exists',
+            'confirmed'    => 'validation.confirmed',
+            'numeric'      => 'validation.numeric',
+            'integer'      => 'validation.integer',
+            'digits'       => 'validation.digits',
+            'image'        => 'validation.image',
+            'url'          => 'validation.url',
+            'date'         => 'validation.date',
+            'dimensions'   => 'validation.dimensions',
+            'size'         => 'validation.size',
+            'mimes'        => 'validation.mimes',
+
+            'password'     => 'validation.password',
+
+            default        => 'validation.failed',
         };
-    }
-
-    protected function extractParams(array $params, string $field, string $rule): array
-    {
-        $data = ['attribute' => $field];
-
-        $rule = strtolower($rule);
-
-        if (in_array($rule, ['min', 'max'])) {
-            $value = null;
-
-            if (count($params)) {
-                $first = reset($params);
-                if (is_array($first) && count($first)) {
-                    $value = reset($first);
-                } else {
-                    $value = $first;
-                }
-            }
-
-            if ($value !== null) {
-                $data[$rule] = $value;
-            }
-        }
-
-        return $data;
     }
 }

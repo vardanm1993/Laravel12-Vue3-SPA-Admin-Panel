@@ -1,77 +1,145 @@
 {
     "app": {
-        "title": "Admin Panel",
-        "welcome": "Welcome to the admin panel",
-        "language": "Language"
+        "title": "Админ-панель",
+        "welcome": "Добро пожаловать в админ-панель",
+        "language": "Язык",
+        "loading": "Загрузка...",
+        "search": "Поиск..."
     },
-
-    "admin": {
-        "panel": "Админ Панель",
-        "dashboard": "Дашборд",
+    "nav": {
+        "home": "Главная",
+        "dashboard": "Панель",
         "products": "Товары",
         "categories": "Категории",
         "users": "Пользователи",
-        "logout": "Выйти"
+        "settings": "Настройки",
+        "profile": "Профиль",
+        "logout": "Выйти",
+        "login": "Вход",
+        "register": "Регистрация"
     },
-
-    "nav": {
-        "home": "Home",
-        "dashboard": "Dashboard"
+    "admin": {
+        "panel": "Админ-панель",
+        "dashboard": "Панель управления",
+        "profile_page": {
+            "title": "Настройки профиля",
+            "info": "Личная информация",
+            "updated": "Ваш профиль обновлён."
+        },
+        "password_page": {
+            "title": "Изменить пароль",
+            "description": "Обновите пароль вашего аккаунта",
+            "updated": "Пароль успешно обновлён."
+        },
+        "delete_page": {
+            "title": "Удалить аккаунт",
+            "warning": "Это действие необратимо. Все ваши данные будут удалены.",
+            "confirm": "Да, удалить аккаунт",
+            "cancel": "Отмена"
+        }
     },
-
     "fields": {
-        "name": "Name",
+        "name": "Имя",
         "email": "Email",
-        "password": "Password",
-        "password_confirmation": "Confirm password",
-        "title": "Title",
-        "color": "Color",
-        "description": "Description"
+        "password": "Пароль",
+        "current_password": "Текущий пароль",
+        "new_password": "Новый пароль",
+        "new_password_confirmation": "Подтвердите новый пароль",
+        "password_confirmation": "Подтверждение пароля",
+        "title": "Заголовок",
+        "color": "Цвет",
+        "description": "Описание",
+        "avatar": "Аватар",
+        "price": "Цена",
+        "quantity": "Количество",
+        "slug": "Слаг",
+        "parent_category": "Родительская категория",
+        "role": "Роль"
     },
-
-    "auth": {
-        "login": "Login",
-        "register": "Register",
-        "logout": "Logout",
-        "remember": "Remember me",
-        "forgot": "Forgot password?",
-        "no_account": "Don't have an account?",
-        "have_account": "Already have an account?"
-    },
-
     "buttons": {
-        "submit": "Submit",
-        "cancel": "Cancel",
-        "delete": "Delete",
-        "edit": "Edit",
-        "save": "Save",
-        "back": "Back",
-        "continue": "Continue",
-        "close": "Close"
+        "submit": "Отправить",
+        "cancel": "Отмена",
+        "delete": "Удалить",
+        "edit": "Редактировать",
+        "save": "Сохранить",
+        "back": "Назад",
+        "continue": "Продолжить",
+        "close": "Закрыть",
+        "upload": "Загрузить",
+        "change_avatar": "Изменить аватар",
+        "create": "Создать",
+        "update": "Обновить"
     },
-
+    "auth": {
+        "login": "Войти",
+        "register": "Зарегистрироваться",
+        "logout": "Выйти",
+        "remember": "Запомнить меня",
+        "forgot": "Забыли пароль?",
+        "no_account": "Нет аккаунта?",
+        "have_account": "Уже есть аккаунт?",
+        "invalid_credentials": "Неверный email или пароль.",
+        "login_success": "Вы успешно вошли!",
+        "success_register": "Регистрация прошла успешно!",
+        "logout_success": "Вы вышли из аккаунта."
+    },
     "messages": {
-        "invalid_credentials": "Invalid email or password",
-        "login_success": "Login successful!",
-        "logout_success": "You have logged out.",
-        "success_register": "Registration successful!",
-        "server_error": "Server error. Try again later",
-        "bad_request": "Bad request.",
-        "unauthorized": "Unauthorized.",
-        "not_found": "Resource not found.",
-        "unknown_error": "Unknown error."
+        "success": "Успех!",
+        "error": "Ошибка!",
+        "saved": "Успешно сохранено.",
+        "updated": "Успешно обновлено.",
+        "deleted": "Успешно удалено.",
+        "server_error": "Ошибка сервера. Попробуйте позже.",
+        "bad_request": "Неверный запрос.",
+        "unauthorized": "Не авторизовано.",
+        "forbidden": "Нет прав для выполнения действия.",
+        "not_found": "Ресурс не найден.",
+        "unknown_error": "Произошла неизвестная ошибка.",
+        "profile_updated": "Профиль успешно обновлён.",
+        "password_updated": "Пароль успешно обновлён.",
+        "account_deleted": "Ваш аккаунт удалён.",
+        "avatar_updated": "Аватар обновлён.",
+        "delete_account": "Удалить аккаунт",
+        "delete_account_confirm": "Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить."
     },
-
+    "toasts": {
+        "success": "Успех",
+        "error": "Ошибка",
+        "info": "Информация",
+        "warning": "Предупреждение"
+    },
+    "roles": {
+        "admin": "Администратор",
+        "manager": "Менеджер",
+        "user": "Пользователь"
+    },
+    "crud": {
+        "create_item": "Создать :item",
+        "edit_item": "Редактировать :item",
+        "delete_item": "Удалить :item",
+        "item_created": ":item успешно создан.",
+        "item_updated": ":item успешно обновлён.",
+        "item_deleted": ":item успешно удалён."
+    },
     "validation": {
-        "failed": "Validation error.",
-        "string": "{attribute} must be a string.",
-        "accepted": "{attribute} must be accepted.",
-        "email": "{attribute} must be a valid email address.",
-        "required": "{attribute} is required.",
-        "min": "{attribute} must be at least {min} characters.",
-        "max": "{attribute} must not be greater than {max} characters.",
-        "unique": "This {attribute} is already taken.",
-        "confirmed": "{attribute} confirmation does not match.",
-        "password_match": "Passwords must match."
+        "failed": "Ошибка валидации.",
+        "required": "{attribute} обязательно.",
+        "string": "{attribute} должно быть строкой.",
+        "email": "{attribute} должен быть действительным email.",
+        "min": "{attribute} должно быть не менее {min} символов.",
+        "max": "{attribute} не может превышать {max} символов.",
+        "confirmed": "Подтверждение не совпадает.",
+        "unique": "{attribute} уже занято.",
+        "exists": "Неверное значение {attribute}.",
+        "numeric": "{attribute} должно быть числом.",
+        "integer": "{attribute} должно быть целым числом.",
+        "digits": "{attribute} должно содержать {digits} цифр.",
+        "between": "{attribute} должно быть между {min} и {max}.",
+        "password": "Неверный текущий пароль.",
+        "image": "{attribute} должно быть изображением.",
+        "size": "{attribute} не должно превышать {size} KB.",
+        "mimes": "{attribute} должно быть файлом типов: {values}.",
+        "url": "{attribute} должен быть действительным URL.",
+        "date": "{attribute} должна быть корректной датой."
     }
 }

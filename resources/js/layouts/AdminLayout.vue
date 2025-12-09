@@ -10,7 +10,7 @@ import AppHeader from '@/components/admin/AppHeader.vue'
         <div class="flex-1 flex flex-col">
             <AppHeader />
             <main class="flex-1 p-6">
-                <RouterView />
+                <router-view />
             </main>
         </div>
     </div>

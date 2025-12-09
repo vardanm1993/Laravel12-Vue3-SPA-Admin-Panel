@@ -2,7 +2,8 @@
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.store.js'
-import LanguageSwitcher from '@/components/shared/LanguageSwitcher.vue'
+import LanguageSwitcher from "@/components/shared/LanguageSwitcher.vue";
+import UserDropDown from "@/components/shared/UserDropDown.vue";
 
 const { t } = useI18n()
 const route = useRoute()
@@ -21,12 +22,9 @@ async function logout() {
             {{ t(route.meta.title) }}
         </h1>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-6">
             <LanguageSwitcher />
-
-            <UiButton variant="outline" size="sm" @click="logout">
-                {{ t('auth.logout') }}
-            </UiButton>
+            <UserDropDown />
         </div>
     </header>
 </template>
