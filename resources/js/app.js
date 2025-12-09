@@ -7,8 +7,12 @@ import App from './App.vue'
 import {i18n} from "@/i18n";
 import ToastService from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
+import clickOutside from "@/directives/clickOutside.js";
 
 const app = createApp(App)
+
+app.directive('click-outside', clickOutside)
+
 
 app.use(createPinia())
     .use(router)

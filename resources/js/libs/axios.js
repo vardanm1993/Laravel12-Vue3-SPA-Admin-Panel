@@ -1,6 +1,6 @@
-import { useToastStore } from '@/stores/toast.store.js'
-import { useErrorStore } from '@/stores/error.store.js'
-import { i18n } from '@/i18n'
+import {useToastStore} from '@/stores/toast.store.js'
+import {useErrorStore} from '@/stores/error.store.js'
+import {i18n} from '@/i18n'
 import axios from 'axios'
 
 export const api = axios.create({
@@ -8,7 +8,7 @@ export const api = axios.create({
     withCredentials: true,
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
-    }
+    },
 })
 
 api.interceptors.request.use((config) => {
@@ -21,15 +21,14 @@ api.interceptors.response.use(
 
     (error) => {
         const status = error.response?.status
-        const data   = error.response?.data
-        const toast  = useToastStore()
+        const data = error.response?.data
+        const toast = useToastStore()
         const errors = useErrorStore()
-        const { url } = error.config || {}
+        const url = error.config?.url || ''
 
-        if (status === 401 && url === '/user') {
+        if (status === 401 && ['/user', '/logout', '/profile/delete'].includes(url)) {
             return Promise.reject(error)
         }
-
 
         if (status === 422 && data?.errors) {
             errors.setErrors(data.errors)
@@ -39,6 +38,16 @@ api.interceptors.response.use(
 
         if (status === 401 && data?.message_key) {
             toast.error(data.message_key)
+            return Promise.reject(error)
+        }
+
+        if (!error.response) {
+            toast.error('messages.server_error')
+            return Promise.reject(error)
+        }
+
+        if (status === 429) {
+            toast.error('messages.too_many_requests')
             return Promise.reject(error)
         }
 

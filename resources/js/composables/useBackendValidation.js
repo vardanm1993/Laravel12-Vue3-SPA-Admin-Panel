@@ -3,13 +3,13 @@ import { useErrorStore } from '@/stores/error.store.js'
 import { useI18n } from 'vue-i18n'
 
 export function useBackendValidation(setErrors) {
-    const { t } = useI18n()
+    const { t, locale } = useI18n()
     const errorStore = useErrorStore()
 
-    watch(() => errorStore.formErrors, (errs) => {
-        if (!errs) return setErrors({})
+    function formatErrors(errs) {
+        if (!errs || Object.keys(errs).length === 0) return {}
 
-        const formatted = {}
+        const out = {}
 
         Object.entries(errs).forEach(([field, messages]) => {
             const e = messages[0] || {}
@@ -19,9 +19,28 @@ export function useBackendValidation(setErrors) {
                 params.attribute = t(`fields.${params.attribute}`)
             }
 
-            formatted[field] = t(e.message_key, params)
+            out[field] = t(e.message_key, params)
         })
 
-        setErrors(formatted)
-    }, { deep: true })
+        return out
+    }
+
+    // 1️⃣ Backend error → translate & setErrors
+    watch(
+        () => errorStore.formErrors,
+        (errs) => {
+            const translated = formatErrors(errs)
+            setErrors(translated)
+        },
+        { deep: true }
+    )
+
+    // 2️⃣ Language changed → re-translate backend errors
+    watch(
+        () => locale.value,
+        () => {
+            const translated = formatErrors(errorStore.formErrors)
+            setErrors(translated)
+        }
+    )
 }

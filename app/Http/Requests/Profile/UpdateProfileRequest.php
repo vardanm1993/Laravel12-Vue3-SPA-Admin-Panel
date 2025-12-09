@@ -1,7 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
-class RegisterRequest extends BaseFormRequest
+namespace App\Http\Requests\Profile;
+
+use App\Http\Requests\BaseFormRequest;
+use Illuminate\Validation\Rule;
+
+class UpdateProfileRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,11 +23,12 @@ class RegisterRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'name'     => 'required|string|max:50',
-            'email'    => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|max:20|confirmed',
-            'role' => ['nullable', 'string', 'in:admin,manager,user'],
-            'remember' => ['nullable', 'boolean']
+            'name'  => ['required', 'string'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($this->user()->id),
+            ],
         ];
     }
 }

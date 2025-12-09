@@ -1,129 +1,99 @@
 <script setup>
-import { computed } from "vue";
-import { cn } from "@/utils/cn.js";
+import { computed } from "vue"
+import { useI18n } from "vue-i18n"
+import { cn } from "@/utils/cn.js"
 
-defineOptions({ inheritAttrs: false })
+const { t } = useI18n()
 
 const props = defineProps({
     modelValue: [String, Number],
-
-    /** LABEL */
-    label: String,
-    required: Boolean,
-    labelPosition: { type: String, default: 'top' },
-    labelClass: String,
-
-    /** INPUT */
-    type: { type: String, default: 'text' },
+    id: String,
+    name: String,
+    type: String,
     placeholder: String,
     disabled: Boolean,
+    autocomplete: String,
+    inputmode: String,
+    preset: String,
+    status: { type: String, default: "default" },
+    class: String,
+})
 
-    /** VALIDATION */
-    status: { type: String, default: 'default' },
-    message: String,
-    messageClass: String,
+const emit = defineEmits(["update:modelValue", "blur", "change"])
 
-    /** CLASSES */
-    wrapperClass: String,
-    inputClass: String,
-});
+const inputId = props.id || `ui-${Math.random().toString(36).slice(2)}`
 
-const emit = defineEmits([
-    'update:modelValue',
-    'input',
-    'blur',
-    'focus',
-    'change',
-    'enter',
-]);
+const presets = {
+    email: {
+        name: "email",
+        type: "email",
+        autocomplete: "email",
+        inputmode: "email",
+        placeholderKey: "fields.email"
+    },
+    password: {
+        name: "password",
+        type: "password",
+        autocomplete: "current-password",
+        placeholderKey: "fields.password"
+    },
+    newPassword: {
+        name: "new_password",
+        type: "password",
+        autocomplete: "new-password",
+        placeholderKey: "fields.new_password"
+    },
+    text: {
+        type: "text",
+        autocomplete: "off"
+    }
+}
 
+const config = computed(() => {
+    const preset = presets[props.preset] || {}
 
-const handleInput  = e => { emit('update:modelValue', e.target.value); emit('input', e.target.value); }
-const handleBlur   = e => emit('blur', e.target.value);
-const handleFocus  = e => emit('focus', e.target.value);
-const handleChange = e => emit('change', e.target.value);
-const handleKeyup  = e => e.key === 'Enter' && emit('enter', e.target.value);
+    return {
+        type: props.type ?? preset.type ?? "text",
+        name: props.name ?? preset.name,
+        autocomplete: props.autocomplete ?? preset.autocomplete,
+        inputmode: props.inputmode ?? preset.inputmode,
 
-/* STATUS COLORS */
+        placeholder:
+            props.placeholder ??
+            (preset.placeholderKey ? t(preset.placeholderKey) : preset.placeholder)
+    }
+})
+
 const statusClasses = {
-    default: 'border-gray-300 focus:ring-blue-300',
-    success: 'border-green-500 focus:ring-green-300',
-    error:   'border-red-500 focus:ring-red-300',
-    warning: 'border-yellow-500 focus:ring-yellow-300',
-};
+    default: "border-gray-300 focus:ring-blue-300",
+    success: "border-green-500 focus:ring-green-300",
+    error: "border-red-500 focus:ring-red-300",
+    warning: "border-yellow-500 focus:ring-yellow-300",
+}
 
-const baseInput = 'w-full px-3 py-2 rounded-xl border text-sm outline-none transition';
-
-const mergedInputClass = computed(() =>
+const classes = computed(() =>
     cn(
-        baseInput,
-        statusClasses[props.status] || statusClasses.default,
-        props.disabled && 'bg-gray-100 cursor-not-allowed',
-        props.inputClass
+        "w-full px-3 py-2 rounded-xl border text-sm outline-none transition bg-white",
+        statusClasses[props.status],
+        props.disabled && "bg-gray-100 cursor-not-allowed",
+        props.class
     )
-);
-
-const mergedLabelClass = computed(() =>
-    cn(
-        'text-sm font-medium',
-        props.required && 'after:content-["*"] after:text-red-500 after:ml-1',
-        props.labelClass
-    )
-);
-
-const mergedMessageClass = computed(() =>
-    cn(
-        'text-xs',
-        {
-            default: 'text-gray-500',
-            success: 'text-green-600',
-            error: 'text-red-600',
-            warning: 'text-yellow-600',
-        }[props.status],
-        props.messageClass
-    )
-);
+)
 </script>
 
 <template>
-    <div :class="wrapperClass">
-        <div class="flex flex-col gap-1">
-            <label v-if="label && labelPosition === 'top'" :class="mergedLabelClass">
-                {{ label }}
-            </label>
-
-            <input
-                v-if="type !== 'textarea'"
-                :value="modelValue"
-                :type="type"
-                :placeholder="placeholder"
-                :disabled="disabled"
-                :class="mergedInputClass"
-                v-bind="$attrs"
-                @input="handleInput"
-                @blur="handleBlur"
-                @focus="handleFocus"
-                @change="handleChange"
-                @keyup="handleKeyup"
-            />
-
-            <textarea
-                v-else
-                :value="modelValue"
-                :placeholder="placeholder"
-                :disabled="disabled"
-                :class="cn(mergedInputClass, 'min-h-[110px] resize-y')"
-                v-bind="$attrs"
-                @input="handleInput"
-                @blur="handleBlur"
-                @focus="handleFocus"
-                @change="handleChange"
-                @keyup="handleKeyup"
-            />
-
-            <p v-if="message" :class="mergedMessageClass">
-                {{ message }}
-            </p>
-        </div>
-    </div>
+    <input
+        :id="inputId"
+        :value="modelValue"
+        :name="config.name"
+        :type="config.type"
+        :placeholder="config.placeholder"
+        :autocomplete="config.autocomplete"
+        :inputmode="config.inputmode"
+        :disabled="disabled"
+        :class="classes"
+        @input="emit('update:modelValue', $event.target.value)"
+        @blur="emit('blur', $event)"
+        @change="emit('change', $event)"
+    />
 </template>
