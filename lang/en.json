@@ -40,6 +40,8 @@
     },
     "fields": {
         "name": "Name",
+        "surname": "Surname",
+        "category": "Category",
         "email": "Email",
         "password": "Password",
         "current_password": "Current password",
@@ -54,7 +56,8 @@
         "quantity": "Quantity",
         "slug": "Slug",
         "parent_category": "Parent category",
-        "role": "Role"
+        "role": "Role",
+        "remember": "Remember me"
     },
     "buttons": {
         "submit": "Submit",
@@ -141,6 +144,8 @@
         "size": "{attribute} must not exceed {size} KB.",
         "mimes": "{attribute} must be a file of type: {values}.",
         "url": "{attribute} must be a valid URL.",
-        "date": "{attribute} must be a valid date."
+        "date": "{attribute} must be a valid date.",
+        "boolean": "{attribute} must be true or false."
+
     }
 }

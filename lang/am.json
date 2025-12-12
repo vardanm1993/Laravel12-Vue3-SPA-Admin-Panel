@@ -40,6 +40,8 @@
     },
     "fields": {
         "name": "Անուն",
+        "surname": "Ազգանուն",
+        "category": "Կատեգորիա",
         "email": "Էլ․ հասցե",
         "password": "Գաղտնաբառ",
         "current_password": "Ընթացիկ գաղտնաբառ",
@@ -54,7 +56,8 @@
         "quantity": "Քանակ",
         "slug": "Սլագ",
         "parent_category": "Վերադաս կատեգորիա",
-        "role": "Դեր"
+        "role": "Դեր",
+        "remember": "Հիշել ինձ"
     },
     "buttons": {
         "submit": "Հաստատել",
@@ -135,11 +138,14 @@
         "integer": "{attribute} պետք է լինի ամբողջ թիվ։",
         "digits": "{attribute} պետք է պարունակի {digits} թվանշան։",
         "between": "{attribute} պետք է լինի {min}-ից {max} սահմաններում։",
-        "password": "Մ текущий пароль неверен.",
+        "password": "Ընթացիկ գաղտնաբառը սխալ է։",
         "image": "{attribute} պետք է լինի լուսանկար։",
+        "dimensions": "{attribute} ունի անվավեր պատկերի չափեր։",
         "size": "{attribute} չպետք է գերազանցի {size} KB։",
         "mimes": "{attribute} պետք է լինի հետևյալ տիպերից՝ {values}։",
         "url": "{attribute} պետք է լինի ճիշտ հղում։",
-        "date": "{attribute} պետք է լինի ճիշտ ամսաթիվ։"
+        "date": "{attribute} պետք է լինի ճիշտ ամսաթիվ։",
+        "boolean": "{attribute}-ը պետք է լինի true կամ false։"
+
     }
 }

@@ -40,6 +40,8 @@
     },
     "fields": {
         "name": "Имя",
+        "surname": "Фамилия",
+        "category": "Категория",
         "email": "Email",
         "password": "Пароль",
         "current_password": "Текущий пароль",
@@ -54,7 +56,8 @@
         "quantity": "Количество",
         "slug": "Слаг",
         "parent_category": "Родительская категория",
-        "role": "Роль"
+        "role": "Роль",
+        "remember": "Запомнить меня"
     },
     "buttons": {
         "submit": "Отправить",
@@ -137,9 +140,11 @@
         "between": "{attribute} должно быть между {min} и {max}.",
         "password": "Неверный текущий пароль.",
         "image": "{attribute} должно быть изображением.",
+        "dimensions": "{attribute} имеет недопустимые размеры изображения.",
         "size": "{attribute} не должно превышать {size} KB.",
         "mimes": "{attribute} должно быть файлом типов: {values}.",
         "url": "{attribute} должен быть действительным URL.",
-        "date": "{attribute} должна быть корректной датой."
+        "date": "{attribute} должна быть корректной датой.",
+        "boolean": "{attribute} должно быть true/false."
     }
 }
