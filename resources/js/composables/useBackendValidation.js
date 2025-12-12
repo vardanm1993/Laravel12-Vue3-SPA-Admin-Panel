@@ -1,6 +1,6 @@
 import { watch } from 'vue'
-import { useErrorStore } from '@/stores/error.store.js'
 import { useI18n } from 'vue-i18n'
+import { useErrorStore } from '@/stores/error.store.js'
 
 export function useBackendValidation(setErrors) {
     const { t, locale } = useI18n()
@@ -12,11 +12,13 @@ export function useBackendValidation(setErrors) {
         const out = {}
 
         Object.entries(errs).forEach(([field, messages]) => {
-            const e = messages[0] || {}
+            const e = (messages && messages[0]) || {}
             const params = { ...(e.params || {}) }
 
             if (params.attribute) {
-                params.attribute = t(`fields.${params.attribute}`)
+                const key = `fields.${params.attribute}`
+                const translated = t(key)
+                params.attribute = translated !== key ? translated : params.attribute
             }
 
             out[field] = t(e.message_key, params)
@@ -25,22 +27,8 @@ export function useBackendValidation(setErrors) {
         return out
     }
 
-    // 1️⃣ Backend error → translate & setErrors
-    watch(
-        () => errorStore.formErrors,
-        (errs) => {
-            const translated = formatErrors(errs)
-            setErrors(translated)
-        },
-        { deep: true }
-    )
+    const apply = () => setErrors(formatErrors(errorStore.formErrors))
 
-    // 2️⃣ Language changed → re-translate backend errors
-    watch(
-        () => locale.value,
-        () => {
-            const translated = formatErrors(errorStore.formErrors)
-            setErrors(translated)
-        }
-    )
+    watch(() => errorStore.formErrors, apply, { deep: true })
+    watch(() => locale.value, apply)
 }

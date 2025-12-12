@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue"
+import { computed, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { cn } from "@/utils/cn.js"
 
@@ -7,63 +7,69 @@ const { t } = useI18n()
 
 const props = defineProps({
     modelValue: [String, Number],
+
     id: String,
+    preset: String,
     name: String,
+
     type: String,
     placeholder: String,
     disabled: Boolean,
     autocomplete: String,
     inputmode: String,
-    preset: String,
+
     status: { type: String, default: "default" },
     class: String,
 })
 
 const emit = defineEmits(["update:modelValue", "blur", "change"])
 
-const inputId = props.id || `ui-${Math.random().toString(36).slice(2)}`
+const localId = ref(`ui-${Math.random().toString(36).slice(2)}`)
+const inputId = computed(() => props.id || localId.value)
+
+const pwd = (autocomplete, name) => ({ type: "password", autocomplete, name })
 
 const presets = {
-    email: {
-        name: "email",
-        type: "email",
-        autocomplete: "email",
-        inputmode: "email",
-        placeholderKey: "fields.email"
-    },
-    password: {
-        name: "password",
-        type: "password",
-        autocomplete: "current-password",
-        placeholderKey: "fields.password"
-    },
-    newPassword: {
-        name: "new_password",
-        type: "password",
-        autocomplete: "new-password",
-        placeholderKey: "fields.new_password"
-    },
-    text: {
-        type: "text",
-        autocomplete: "off"
-    }
+    email: { type: "email", autocomplete: "email", inputmode: "email", name: "email" },
+
+    name: { type: "text", autocomplete: "name", name: "name" },
+    surname: { type: "text", autocomplete: "family-name", name: "surname" },
+    category: { type: "text", autocomplete: "off", name: "category" },
+
+    password: pwd("current-password", "password"),
+    current_password: pwd("current-password", "current_password"),
+    password_confirmation: pwd("new-password", "password_confirmation"),
+    new_password: pwd("new-password", "new_password"),
+    new_password_confirmation: pwd("new-password", "new_password_confirmation"),
+
+    text: { type: "text", autocomplete: "off" },
 }
 
-const config = computed(() => {
-    const preset = presets[props.preset] || {}
+const presetConf = computed(() => presets[props.preset] || presets.text)
 
-    return {
-        type: props.type ?? preset.type ?? "text",
-        name: props.name ?? preset.name,
-        autocomplete: props.autocomplete ?? preset.autocomplete,
-        inputmode: props.inputmode ?? preset.inputmode,
-
-        placeholder:
-            props.placeholder ??
-            (preset.placeholderKey ? t(preset.placeholderKey) : preset.placeholder)
-    }
+const resolvedName = computed(() => {
+    if (props.name) return props.name
+    if (presetConf.value.name) return presetConf.value.name
+    return props.preset || ""
 })
 
+const autoPlaceholder = computed(() => {
+    const n = resolvedName.value
+    if (!n) return ""
+    const key = `fields.${n}`
+    const translated = t(key)
+    return translated !== key ? translated : ""
+})
+
+const config = computed(() => ({
+    name: resolvedName.value || undefined,
+
+    type: props.type ?? presetConf.value.type ?? "text",
+    autocomplete: props.autocomplete ?? presetConf.value.autocomplete,
+    inputmode: props.inputmode ?? presetConf.value.inputmode,
+
+    placeholder: props.placeholder ?? autoPlaceholder.value,
+}))
 const statusClasses = {
     default: "border-gray-300 focus:ring-blue-300",
     success: "border-green-500 focus:ring-green-300",

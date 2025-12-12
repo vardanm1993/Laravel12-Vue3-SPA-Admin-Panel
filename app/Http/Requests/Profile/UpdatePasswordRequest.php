@@ -20,7 +20,7 @@ class UpdatePasswordRequest extends BaseFormRequest
             'new_password' => [
                 'required',
                 'string',
-                'min:6',
+                'min:8',
                 'max:40',
                 'confirmed',
             ],

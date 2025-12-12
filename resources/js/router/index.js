@@ -24,7 +24,7 @@ const router = createRouter({
                     name: 'admin.register',
                     component: () => import('@/pages/admin/auth/Register.vue'),
                     meta: { guestOnly: true, title: 'auth.register' },
-                }
+                },
             ]
         },
 
