@@ -1,5 +1,12 @@
 <script setup>
+import {onMounted} from "vue";
+import {useToastStore} from "@/stores/toast.store.js";
 
+const toast = useToastStore()
+
+onMounted(() => {
+    toast.showFlashIfExists()
+})
 </script>
 
 <template>

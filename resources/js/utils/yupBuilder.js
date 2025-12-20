@@ -1,4 +1,3 @@
-// resources/js/utils/yupBuilder.js
 import * as yup from 'yup'
 
 const getRuleName = (r) => String(r).split(':')[0]

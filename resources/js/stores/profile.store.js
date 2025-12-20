@@ -3,6 +3,8 @@ import {ref} from 'vue'
 import {useProfileService} from '@/services/profile.service.js'
 import {useToastStore} from '@/stores/toast.store.js'
 import {useAuthStore} from '@/stores/auth.store.js'
+import {useVerificationFlowStore} from "@/stores/verificationFlow.store.js";
+import router from "@/router/index.js";
 
 export const useProfileStore = defineStore('profile', () => {
     const service = useProfileService()
@@ -13,13 +15,12 @@ export const useProfileStore = defineStore('profile', () => {
     const auth = useAuthStore()
 
 
-
     async function fetchProfile() {
         loading.value = true
         try {
             const res = await service.fetch()
             profile.value = res.user || null
-        }  finally {
+        } finally {
             loading.value = false
         }
     }
@@ -33,7 +34,22 @@ export const useProfileStore = defineStore('profile', () => {
             if (auth.user) {
                 auth.user.name = res.user.name
                 auth.user.email = res.user.email
+                auth.user.email_verified_at = res.user.email_verified_at
             }
+
+
+            if (auth.user && !auth.user.email_verified_at) {
+                const flow = useVerificationFlowStore()
+
+                flow.set({
+                    next: { name: 'admin.profile' },
+                    flashKey: 'messages.profile_updated',
+                })
+
+                return router.push({
+                    name: 'admin.verify-email',
+                    query: { verify: 'sent', next: 'admin.profile' }
+                })            }
 
             toast.success(res.message_key || 'messages.profile_updated')
         } finally {
@@ -74,7 +90,7 @@ export const useProfileStore = defineStore('profile', () => {
             const res = await service.deleteAccount(data)
             profile.value = null
             return res
-        }  finally {
+        } finally {
             loading.value = false
         }
     }

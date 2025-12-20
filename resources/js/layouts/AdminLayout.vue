@@ -1,6 +1,14 @@
 <script setup>
 import Sidebar from '@/components/admin/Sidebar.vue'
 import AppHeader from '@/components/admin/AppHeader.vue'
+import {onMounted} from "vue";
+import {useToastStore} from "@/stores/toast.store.js";
+
+const toast = useToastStore()
+
+onMounted(() => {
+    toast.showFlashIfExists()
+})
 </script>
 
 <template>
