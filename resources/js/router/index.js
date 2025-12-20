@@ -25,13 +25,39 @@ const router = createRouter({
                     component: () => import('@/pages/admin/auth/Register.vue'),
                     meta: { guestOnly: true, title: 'auth.register' },
                 },
+                {
+                    path: 'forgot-password',
+                    name: 'admin.forgot-password',
+                    component: () => import('@/pages/admin/auth/ForgotPasswordPage.vue'),
+                    meta: { title: 'auth.forgot_password' },
+                },
+                {
+                    path: 'reset-password',
+                    name: 'admin.reset-password',
+                    component: () => import('@/pages/admin/auth/ResetPasswordPage.vue'),
+                    meta: { title: 'auth.reset_password' },
+                },
             ]
         },
 
         {
             path: '/admin',
-            component: AdminLayout,
+            component: AuthLayout,
             meta: { requiresAuth: true },
+            children: [
+                {
+                    path: 'verify-email',
+                    name: 'admin.verify-email',
+                    component: () => import('@/pages/admin/auth/VerifyEmailPage.vue'),
+                    meta: { requiresAuth: true, title: 'auth.verify_email' },
+                },
+            ],
+        },
+
+        {
+            path: '/admin',
+            component: AdminLayout,
+            meta: { requiresAuth: true , requiresVerified: true },
             children: [
                 {
                     path: 'dashboard',
@@ -74,13 +100,23 @@ router.beforeEach(async (to) => {
         try { await auth.getUser() } catch {}
     }
 
-    if (to.meta.requiresAuth && !auth.user) {
+    const requiresAuth = to.matched.some(r => r.meta.requiresAuth)
+    const guestOnly = to.matched.some(r => r.meta.guestOnly)
+    const requiresVerified = to.matched.some(r => r.meta.requiresVerified)
+
+    if (requiresAuth && !auth.user) {
         return { name: 'admin.login' }
     }
 
-    if (to.meta.guestOnly && auth.user) {
+    if (requiresVerified && auth.user && !auth.user.email_verified_at) {
+        return { name: 'admin.verify-email' }
+    }
+
+    if (guestOnly && auth.user) {
+        if (!auth.user.email_verified_at) return { name: 'admin.verify-email' }
         return { name: 'admin.dashboard' }
     }
 })
+
 
 export default router

@@ -1,64 +1,60 @@
 <script setup>
-import { useRouter } from 'vue-router'
-
-import { useFormBuilder } from '@/composables/useFormBuilder.js'
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.store.js'
+import { useToastStore } from '@/stores/toast.store.js'
+import { useFormBuilder } from '@/composables/useFormBuilder.js'
 
 import SmartForm from '@/components/shared/SmartForm.vue'
-import UiCheckbox from '@/components/ui/UiCheckbox.vue'
 import UiLink from '@/components/ui/UiLink.vue'
 
+const route = useRoute()
 const auth = useAuthStore()
+
+const token = String(route.query.token || '')
+const email = String(route.query.email || '')
 
 const form = useFormBuilder({
     rules: {
-        name: ['required'],
         email: ['required', 'email'],
         password: ['required', 'min:6'],
         password_confirmation: ['required', 'confirmed:password'],
+        token: ['required'],
     },
-    fields: ['name', 'email', 'password', 'password_confirmation', 'remember'],
+    fields: ['email', 'password', 'password_confirmation', 'token'],
     initialValues: {
-        name: '',
-        email: '',
+        email,
         password: '',
         password_confirmation: '',
-        remember: false,
+        token,
     },
-    fieldOptions: { remember: { initialValue: false } },
     backend: true,
 })
 
 const fields = [
-    { name: 'name', preset: 'name' },
     { name: 'email', preset: 'email' },
     { name: 'password', preset: 'password' },
     { name: 'password_confirmation', preset: 'password_confirmation' },
 ]
 
 const onSubmit = async (values) => {
-    await auth.register(values)
+    await auth.resetPassword(values)
 }
 </script>
 
 <template>
     <SmartForm
         :form="form"
-        titleKey="auth.register"
-        submitTextKey="auth.register"
+        titleKey="auth.reset_password"
+        submitTextKey="auth.reset_password"
         :fields="fields"
         :loading="auth.loading"
         @submit="onSubmit"
     >
-        <template #between="{ form }">
-            <UiCheckbox v-model="form.model.remember" :label="form.t('auth.remember')" />
-        </template>
-
         <template #after="{ form }">
             <p class="text-center text-sm text-gray-600">
-                {{ form.t('auth.have_account') }}
-                <UiLink :to="{ name: 'admin.login' }" class="ml-1">
-                    {{ form.t('auth.login') }}
+                <UiLink :to="{ name: 'admin.login' }">
+                    {{ form.t('auth.back_to_login') }}
                 </UiLink>
             </p>
         </template>

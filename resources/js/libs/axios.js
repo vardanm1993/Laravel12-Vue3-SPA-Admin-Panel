@@ -51,6 +51,11 @@ api.interceptors.response.use(
             return Promise.reject(error)
         }
 
+        if (status === 403) {
+            toast.error(data?.message_key || 'messages.forbidden')
+            return Promise.reject(error)
+        }
+
         const key = data?.message_key || 'messages.unknown_error'
         toast.error(key)
 

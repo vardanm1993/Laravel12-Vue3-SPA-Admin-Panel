@@ -10,9 +10,6 @@ import UiCheckbox from '@/components/ui/UiCheckbox.vue'
 import UiLink from '@/components/ui/UiLink.vue'
 
 const auth = useAuthStore()
-const toast = useToastStore()
-
-onMounted(() => toast.showFlashIfExists())
 
 const form = useFormBuilder({
     rules: {
@@ -49,12 +46,19 @@ const onSubmit = async (values) => {
         </template>
 
         <template #after="{ form }">
-            <p class="text-center text-sm text-gray-600">
-                {{ form.t('auth.no_account') }}
-                <UiLink :to="{ name: 'admin.register' }" class="ml-1">
-                    {{ form.t('auth.register') }}
-                </UiLink>
-            </p>
+           <div class="flex flex-col gap-3">
+               <p class="text-center text-sm text-gray-600">
+                   <UiLink :to="{ name: 'admin.forgot-password' }">
+                       {{ form.t('auth.forgot') }}
+                   </UiLink>
+               </p>
+               <p class="text-center text-sm text-gray-600">
+                   {{ form.t('auth.no_account') }}
+                   <UiLink :to="{ name: 'admin.register' }" class="ml-1">
+                       {{ form.t('auth.register') }}
+                   </UiLink>
+               </p>
+           </div>
         </template>
     </SmartForm>
 </template>

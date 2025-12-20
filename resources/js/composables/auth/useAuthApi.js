@@ -11,6 +11,10 @@ export function useAuthApi() {
     const getUser = () => get('/user')
     const updateUser = (id, data) => patch(`/users/${id}`, data)
     const removeUser = (id) => del(`users/${id}`)
+    const sendVerification = () => post('/email/verification-notification')
+    const forgotPassword = (data) => post('/forgot-password', data)
+    const resetPassword = (data) => post('/reset-password', data)
+
 
     return {
         csrf,
@@ -19,6 +23,9 @@ export function useAuthApi() {
         logout,
         getUser,
         updateUser,
-        removeUser
+        removeUser,
+        sendVerification,
+        resetPassword,
+        forgotPassword
     }
 }

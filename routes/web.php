@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -14,12 +16,27 @@ Route::prefix('api')
     ->group(function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
+
+        Route::post('/forgot-password', [PasswordResetController::class, 'forgot'])
+            ->middleware(['throttle:6,1']);
+
+        Route::post('/reset-password', [PasswordResetController::class, 'reset'])
+            ->middleware(['throttle:6,1']);
+
         Route::post('/logout', [AuthController::class, 'logout'])
             ->middleware('auth:sanctum');
 
         Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
             return $request->user();
         });
+
+        Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+            ->middleware(['signed', 'throttle:6,1'])
+            ->name('verification.verify');
+
+        Route::post('/email/verification-notification', [EmailVerificationController::class, 'send'])
+            ->middleware(['auth:sanctum', 'throttle:6,1'])
+            ->name('verification.send');
 
         Route::middleware('auth:sanctum')->group(function () {
             Route::get('/profile', [ProfileController::class, 'show']);

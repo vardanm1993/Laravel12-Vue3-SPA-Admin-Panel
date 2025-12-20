@@ -84,7 +84,14 @@
         "invalid_credentials": "Սխալ email կամ գաղտնաբառ։",
         "login_success": "Դուք հաջողությամբ մուտք գործեցիք։",
         "success_register": "Գրանցումն ավարտված է։",
-        "logout_success": "Դուք դուրս եկաք համակարգից։"
+        "logout_success": "Դուք դուրս եկաք համակարգից։",
+        "forgot_password": "Մոռացել եք գաղտնաբառը",
+        "send_reset_link": "Ուղարկել հղումը",
+        "back_to_login": "Վերադառնալ մուտք",
+        "reset_password": "Վերականգնել գաղտնաբառը",
+        "reset_link_sent": "Եթե հաշիվը գոյություն ունի, ուղարկել ենք գաղտնաբառի վերականգնման հղումը։",
+        "password_reset_success": "Գաղտնաբառը հաջողությամբ թարմացվեց։",
+        "reset_invalid_token": "Հղումը անվավեր է կամ ժամկետանց։"
     },
     "messages": {
         "success": "Հաջողվեց!",

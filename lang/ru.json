@@ -84,7 +84,14 @@
         "invalid_credentials": "Неверный email или пароль.",
         "login_success": "Вы успешно вошли!",
         "success_register": "Регистрация прошла успешно!",
-        "logout_success": "Вы вышли из аккаунта."
+        "logout_success": "Вы вышли из аккаунта.",
+        "forgot_password": "Забыли пароль",
+        "send_reset_link": "Отправить ссылку",
+        "back_to_login": "Вернуться ко входу",
+        "reset_password": "Сброс пароля",
+        "reset_link_sent": "Если аккаунт с этим email существует, мы отправили ссылку для сброса пароля.",
+        "password_reset_success": "Пароль успешно обновлён.",
+        "reset_invalid_token": "Ссылка недействительна или устарела."
     },
     "messages": {
         "success": "Успех!",

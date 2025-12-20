@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
-class LoginRequest extends BaseFormRequest
+namespace App\Http\Requests\Auth;
+
+use App\Http\Requests\BaseFormRequest;
+
+class ForgotPasswordRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,9 +22,7 @@ class LoginRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'email'    => 'required|email',
-            'password' => 'required|string',
-            'remember' => ['nullable', 'boolean'],
+            'email' => ['required', 'email'],
         ];
     }
 }

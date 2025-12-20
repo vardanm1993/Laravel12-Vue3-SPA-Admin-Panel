@@ -84,7 +84,20 @@
         "invalid_credentials": "Invalid email or password.",
         "login_success": "Login successful!",
         "success_register": "Registration successful!",
-        "logout_success": "You have been logged out."
+        "logout_success": "You have been logged out.",
+        "verify_email": "Verify email",
+        "verify_email_hint": "Please check your inbox and click the verification link.",
+        "resend_verification": "Resend email",
+        "verification_sent": "Verification email sent.",
+        "email_verified": "Email verified successfully.",
+        "email_verify_invalid": "Verification link is invalid.",
+        "forgot_password": "Forgot password",
+        "send_reset_link": "Send reset link",
+        "back_to_login": "Back to login",
+        "reset_password": "Reset password",
+        "reset_link_sent": "If an account exists for this email, we sent a password reset link.",
+        "password_reset_success": "Password has been reset successfully.",
+        "reset_invalid_token": "Reset link is invalid or expired."
     },
     "messages": {
         "success": "Success!",
