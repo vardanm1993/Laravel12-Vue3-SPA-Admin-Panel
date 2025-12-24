@@ -24,7 +24,6 @@ class RegisterRequest extends BaseFormRequest
             'name'     => 'required|string|max:50',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|max:20|confirmed',
-            'role' => ['nullable', 'string', 'in:admin,manager,user'],
             'remember' => ['nullable', 'boolean']
         ];
     }

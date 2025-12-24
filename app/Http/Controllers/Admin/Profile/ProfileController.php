@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Profile;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\DeleteAccountRequest;
 use App\Http\Requests\Profile\UpdatePasswordRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
@@ -13,8 +14,12 @@ class ProfileController extends Controller
 {
     public function show(): JsonResponse
     {
+        $user = auth()->user();
+
         return response()->json([
-            'user' => auth()->user(),
+            'user' => $user,
+            'roles' => $user->getRoleNames()->values(),
+            'permissions' => $user->getAllPermissions()->pluck('name')->values(),
         ]);
     }
 

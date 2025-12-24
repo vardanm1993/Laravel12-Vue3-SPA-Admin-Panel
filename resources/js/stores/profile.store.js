@@ -1,10 +1,10 @@
-import {defineStore} from 'pinia'
-import {ref} from 'vue'
-import {useProfileService} from '@/services/profile.service.js'
-import {useToastStore} from '@/stores/toast.store.js'
-import {useAuthStore} from '@/stores/auth.store.js'
-import {useVerificationFlowStore} from "@/stores/verificationFlow.store.js";
-import router from "@/router/index.js";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { useProfileService } from '@/services/profile.service.js'
+import { useToastStore } from '@/stores/toast.store.js'
+import { useAuthStore } from '@/stores/auth.store.js'
+import { useVerificationFlowStore } from '@/stores/verificationFlow.store.js'
+import router from '@/router/index.js'
 
 export const useProfileStore = defineStore('profile', () => {
     const service = useProfileService()
@@ -13,7 +13,6 @@ export const useProfileStore = defineStore('profile', () => {
     const profile = ref(null)
     const loading = ref(false)
     const auth = useAuthStore()
-
 
     async function fetchProfile() {
         loading.value = true
@@ -31,12 +30,7 @@ export const useProfileStore = defineStore('profile', () => {
             const res = await service.updateProfile(data)
             profile.value = res.user
 
-            if (auth.user) {
-                auth.user.name = res.user.name
-                auth.user.email = res.user.email
-                auth.user.email_verified_at = res.user.email_verified_at
-            }
-
+            await auth.getUser()
 
             if (auth.user && !auth.user.email_verified_at) {
                 const flow = useVerificationFlowStore()
@@ -48,8 +42,9 @@ export const useProfileStore = defineStore('profile', () => {
 
                 return router.push({
                     name: 'admin.verify-email',
-                    query: { verify: 'sent', next: 'admin.profile' }
-                })            }
+                    query: { verify: 'sent' },
+                })
+            }
 
             toast.success(res.message_key || 'messages.profile_updated')
         } finally {
@@ -102,6 +97,6 @@ export const useProfileStore = defineStore('profile', () => {
         updateProfile,
         updatePassword,
         uploadAvatar,
-        deleteAccount
+        deleteAccount,
     }
 })

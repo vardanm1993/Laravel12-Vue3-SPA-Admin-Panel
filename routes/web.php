@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\EmailVerificationController;
-use App\Http\Controllers\PasswordResetController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\Auth\EmailVerificationController;
+use App\Http\Controllers\Admin\Auth\PasswordResetController;
+use App\Http\Controllers\Admin\Profile\ProfileController;
+use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 Route::prefix('api')
@@ -26,9 +27,33 @@ Route::prefix('api')
         Route::post('/logout', [AuthController::class, 'logout'])
             ->middleware('auth:sanctum');
 
-        Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-            return $request->user();
+        Route::get('/user', function (Request $request) {
+            $user = $request->user();
+
+            return response()->json([
+                'user' => $user,
+                'roles' => $user->getRoleNames()->values(),
+                'permissions' => $user->getAllPermissions()->pluck('name')->values(),
+            ]);
+        })->middleware('auth:sanctum');
+
+        Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+            Route::get('/admin/roles', [UserController::class, 'roles'])
+                ->middleware('permission:users.view');
+
+            Route::get('/admin/users', [UserController::class, 'index'])
+                ->middleware('permission:users.view');
+
+            Route::patch('/admin/users/{user}', [UserController::class, 'update'])
+                ->middleware('permission:users.update');
+
+            Route::put('/admin/users/{user}/roles', [UserController::class, 'syncRoles'])
+                ->middleware('permission:users.roles.sync');
         });
+
+
+
 
         Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
             ->middleware(['signed', 'throttle:6,1'])
