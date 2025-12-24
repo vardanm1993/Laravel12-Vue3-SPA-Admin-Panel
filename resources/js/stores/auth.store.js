@@ -1,24 +1,33 @@
-import {defineStore} from 'pinia'
-import {useAuthApi} from '@/composables/auth/useAuthApi.js'
-import {ref} from 'vue'
-import {useErrorStore} from "@/stores/error.store.js";
-import {useFlashRedirect} from "@/composables/useFlashRedirect.js";
-import {useToastStore} from "@/stores/toast.store.js";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { useAuthApi } from '@/composables/auth/useAuthApi.js'
+import { useErrorStore } from '@/stores/error.store.js'
+import { useFlashRedirect } from '@/composables/useFlashRedirect.js'
 
 export const useAuthStore = defineStore('auth', () => {
     const user = ref(null)
+    const roles = ref([])
+    const permissions = ref([])
     const loading = ref(false)
 
     const api = useAuthApi()
     const errors = useErrorStore()
+    const { flashAndRedirect } = useFlashRedirect()
 
-    const {flashAndRedirect} = useFlashRedirect()
+    function can(p) {
+        return permissions.value.includes(p)
+    }
 
     async function getUser() {
         try {
-            user.value = await api.getUser()
+            const res = await api.getUser()
+            user.value = res?.user || null
+            roles.value = res?.roles || []
+            permissions.value = res?.permissions || []
         } catch {
             user.value = null
+            roles.value = []
+            permissions.value = []
         }
     }
 
@@ -55,27 +64,31 @@ export const useAuthStore = defineStore('auth', () => {
                 : 'admin.dashboard'
 
             flashAndRedirect(target, res.message_key || 'auth.register_success', {
-                query: { verify: 'sent' }
+                query: { verify: 'sent' },
             })
         } finally {
             loading.value = false
         }
     }
 
-
     async function logout() {
         try {
             await api.csrf()
             await api.logout()
         } catch {}
+
         user.value = null
+        roles.value = []
+        permissions.value = []
     }
 
     async function sendVerification() {
         try {
             await api.csrf()
-            await api.sendVerification()
-        } catch {}
+            return await api.sendVerification()
+        } catch {
+            return null
+        }
     }
 
     async function forgotPassword(payload) {
@@ -104,9 +117,18 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
-
     return {
-        user, loading,
-        getUser, login, register, logout, sendVerification,forgotPassword,resetPassword
+        user,
+        roles,
+        permissions,
+        can,
+        loading,
+        getUser,
+        login,
+        register,
+        logout,
+        sendVerification,
+        forgotPassword,
+        resetPassword,
     }
 })

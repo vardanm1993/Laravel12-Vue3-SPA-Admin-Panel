@@ -1,12 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.store.js'
-
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 
+import {
+    ensureAuthLoaded,
+    isGuestOnly,
+    requiresAuth,
+    requiresVerified,
+    requiredPermission,
+} from '@/router/guards/auth.js'
+
+import { checkPermission } from '@/router/guards/permissions.js'
+
 const router = createRouter({
     history: createWebHistory(),
-
     routes: [
         {
             path: '/admin',
@@ -37,7 +44,7 @@ const router = createRouter({
                     component: () => import('@/pages/admin/auth/ResetPasswordPage.vue'),
                     meta: { title: 'auth.reset_password' },
                 },
-            ]
+            ],
         },
 
         {
@@ -57,7 +64,7 @@ const router = createRouter({
         {
             path: '/admin',
             component: AdminLayout,
-            meta: { requiresAuth: true , requiresVerified: true },
+            meta: { requiresAuth: true, requiresVerified: true },
             children: [
                 {
                     path: 'dashboard',
@@ -82,41 +89,43 @@ const router = createRouter({
                     name: 'admin.profile.delete',
                     component: () => import('@/pages/admin/profile/DeleteAccountPage.vue'),
                     meta: { requiresAuth: true, title: 'admin.delete_page.title' },
-                }
-            ]
+                },
+
+                {
+                    path: 'users',
+                    name: 'admin.users.index',
+                    component: () => import('@/pages/admin/users/UsersIndexPage.vue'),
+                    meta: { requiresAuth: true, requiresVerified: true, permission: 'users.view', title: 'admin.users.title' },
+                },
+            ],
         },
 
         { path: '/', redirect: '/admin/dashboard' },
-    ]
+    ],
 })
 
-let initialized = false
-
 router.beforeEach(async (to) => {
-    const auth = useAuthStore()
+    const auth = await ensureAuthLoaded()
 
-    if (!initialized) {
-        initialized = true
-        try { await auth.getUser() } catch {}
-    }
-
-    const requiresAuth = to.matched.some(r => r.meta.requiresAuth)
-    const guestOnly = to.matched.some(r => r.meta.guestOnly)
-    const requiresVerified = to.matched.some(r => r.meta.requiresVerified)
-
-    if (requiresAuth && !auth.user) {
+    if (requiresAuth(to) && !auth.user) {
         return { name: 'admin.login' }
     }
 
-    if (requiresVerified && auth.user && !auth.user.email_verified_at) {
+    if (requiresVerified(to) && auth.user && !auth.user.email_verified_at) {
         return { name: 'admin.verify-email' }
     }
 
-    if (guestOnly && auth.user) {
+    if (isGuestOnly(to) && auth.user) {
         if (!auth.user.email_verified_at) return { name: 'admin.verify-email' }
         return { name: 'admin.dashboard' }
     }
-})
 
+    const perm = requiredPermission(to)
+    if (perm) {
+        return await checkPermission(perm)
+    }
+
+    return true
+})
 
 export default router

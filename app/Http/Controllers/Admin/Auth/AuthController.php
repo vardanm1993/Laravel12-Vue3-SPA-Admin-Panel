@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
@@ -19,7 +20,7 @@ class AuthController extends Controller
             'password' => $validated['password'],
         ];
 
-        $remember = $validated['remember'] ?? false;
+        $remember = (bool) ($validated['remember'] ?? false);
 
         if (!Auth::guard('web')->attempt($credentials, $remember)) {
             return response()->json([
@@ -29,12 +30,15 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
+        $user = $request->user();
+
         return response()->json([
             'message_key' => 'auth.login_success',
-            'user' => Auth::user(),
+            'user' => $user,
+            'roles' => $user->getRoleNames()->values(),
+            'permissions' => $user->getAllPermissions()->pluck('name')->values(),
         ]);
     }
-
 
     public function register(RegisterRequest $request): JsonResponse
     {
@@ -44,27 +48,28 @@ class AuthController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
-            'role' => $validated['role'] ?? 'user',
         ]);
 
-        $remember = $validated['remember'] ?? false;
+        $user->assignRole('user');
 
+        $remember = (bool) ($validated['remember'] ?? false);
         Auth::guard('web')->login($user, $remember);
 
         $user->sendEmailVerificationNotification();
-
         $request->session()->regenerate();
 
         return response()->json([
             'message_key' => 'auth.success_register',
             'user' => $user,
+            'roles' => $user->getRoleNames()->values(),
+            'permissions' => $user->getAllPermissions()->pluck('name')->values(),
         ], 201);
     }
 
-
     public function logout(): JsonResponse
     {
-        auth()->guard('web')->logout();
+        Auth::guard('web')->logout();
+
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 

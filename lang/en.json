@@ -21,6 +21,9 @@
     "admin": {
         "panel": "Admin Panel",
         "dashboard": "Dashboard",
+        "users": {
+            "title": "Users"
+        },
         "profile_page": {
             "title": "Profile Settings",
             "info": "Personal information",
@@ -37,6 +40,12 @@
             "confirm": "Yes, delete my account",
             "cancel": "Cancel"
         }
+    },
+    "users": {
+        "search_placeholder": "Search by name or email",
+        "role_all": "All roles",
+        "updated": "User updated",
+        "roles_updated": "Roles updated"
     },
     "fields": {
         "name": "Name",
@@ -71,7 +80,8 @@
         "upload": "Upload",
         "change_avatar": "Change avatar",
         "create": "Create",
-        "update": "Update"
+        "update": "Update",
+        "search": "Search"
     },
     "auth": {
         "login": "Login",
@@ -159,6 +169,5 @@
         "url": "{attribute} must be a valid URL.",
         "date": "{attribute} must be a valid date.",
         "boolean": "{attribute} must be true or false."
-
     }
 }
