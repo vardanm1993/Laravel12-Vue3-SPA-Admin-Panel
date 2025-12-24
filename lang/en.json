@@ -1,0 +1,173 @@
+{
+    "app": {
+        "title": "Admin Panel",
+        "welcome": "Welcome to the admin panel",
+        "language": "Language",
+        "loading": "Loading...",
+        "search": "Search..."
+    },
+    "nav": {
+        "home": "Home",
+        "dashboard": "Dashboard",
+        "products": "Products",
+        "categories": "Categories",
+        "users": "Users",
+        "settings": "Settings",
+        "profile": "Profile",
+        "logout": "Logout",
+        "login": "Login",
+        "register": "Register"
+    },
+    "admin": {
+        "panel": "Admin Panel",
+        "dashboard": "Dashboard",
+        "users": {
+            "title": "Users"
+        },
+        "profile_page": {
+            "title": "Profile Settings",
+            "info": "Personal information",
+            "updated": "Your profile has been updated."
+        },
+        "password_page": {
+            "title": "Change Password",
+            "description": "Update your account password",
+            "updated": "Your password has been updated."
+        },
+        "delete_page": {
+            "title": "Delete Account",
+            "warning": "This action cannot be undone. All your data will be permanently deleted.",
+            "confirm": "Yes, delete my account",
+            "cancel": "Cancel"
+        }
+    },
+    "users": {
+        "search_placeholder": "Search by name or email",
+        "role_all": "All roles",
+        "updated": "User updated",
+        "roles_updated": "Roles updated"
+    },
+    "fields": {
+        "name": "Name",
+        "surname": "Surname",
+        "category": "Category",
+        "email": "Email",
+        "password": "Password",
+        "current_password": "Current password",
+        "new_password": "New password",
+        "new_password_confirmation": "Confirm new password",
+        "password_confirmation": "Confirm password",
+        "title": "Title",
+        "color": "Color",
+        "description": "Description",
+        "avatar": "Avatar",
+        "price": "Price",
+        "quantity": "Quantity",
+        "slug": "Slug",
+        "parent_category": "Parent category",
+        "role": "Role",
+        "remember": "Remember me"
+    },
+    "buttons": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "save": "Save",
+        "back": "Back",
+        "continue": "Continue",
+        "close": "Close",
+        "upload": "Upload",
+        "change_avatar": "Change avatar",
+        "create": "Create",
+        "update": "Update",
+        "search": "Search"
+    },
+    "auth": {
+        "login": "Login",
+        "register": "Register",
+        "logout": "Logout",
+        "remember": "Remember me",
+        "forgot": "Forgot password?",
+        "no_account": "Don't have an account?",
+        "have_account": "Already have an account?",
+        "invalid_credentials": "Invalid email or password.",
+        "login_success": "Login successful!",
+        "success_register": "Registration successful!",
+        "logout_success": "You have been logged out.",
+        "verify_email": "Verify email",
+        "verify_email_hint": "Please check your inbox and click the verification link.",
+        "resend_verification": "Resend email",
+        "verification_sent": "Verification email sent.",
+        "email_verified": "Email verified successfully.",
+        "email_verify_invalid": "Verification link is invalid.",
+        "forgot_password": "Forgot password",
+        "send_reset_link": "Send reset link",
+        "back_to_login": "Back to login",
+        "reset_password": "Reset password",
+        "reset_link_sent": "If an account exists for this email, we sent a password reset link.",
+        "password_reset_success": "Password has been reset successfully.",
+        "reset_invalid_token": "Reset link is invalid or expired."
+    },
+    "messages": {
+        "success": "Success!",
+        "error": "Error!",
+        "saved": "Saved successfully.",
+        "updated": "Updated successfully.",
+        "deleted": "Deleted successfully.",
+        "server_error": "Server error. Try again later.",
+        "bad_request": "Bad request.",
+        "unauthorized": "Unauthorized.",
+        "forbidden": "You don't have permission to perform this action.",
+        "not_found": "Resource not found.",
+        "unknown_error": "Unknown error occurred.",
+        "profile_updated": "Profile updated successfully.",
+        "password_updated": "Password updated successfully.",
+        "account_deleted": "Your account has been deleted.",
+        "avatar_updated": "Avatar updated successfully.",
+        "delete_account": "Delete Account",
+        "delete_account_confirm": "Are you sure you want to delete your account? This action cannot be undone."
+    },
+    "toasts": {
+        "success": "Success",
+        "error": "Error",
+        "info": "Info",
+        "warning": "Warning"
+    },
+    "roles": {
+        "admin": "Administrator",
+        "manager": "Manager",
+        "user": "User"
+    },
+    "crud": {
+        "create_item": "Create new :item",
+        "edit_item": "Edit :item",
+        "delete_item": "Delete :item",
+        "item_created": ":item created successfully.",
+        "item_updated": ":item updated successfully.",
+        "item_deleted": ":item deleted successfully."
+    },
+    "validation": {
+        "failed": "Validation error.",
+        "required": "{attribute} is required.",
+        "string": "{attribute} must be a string.",
+        "email": "{attribute} must be a valid email address.",
+        "min": "{attribute} must be at least {min} characters.",
+        "max": "{attribute} cannot exceed {max} characters.",
+        "confirmed": "{attribute} confirmation does not match.",
+        "unique": "This {attribute} is already taken.",
+        "exists": "Selected {attribute} is invalid.",
+        "numeric": "{attribute} must be a number.",
+        "integer": "{attribute} must be an integer.",
+        "digits": "{attribute} must be {digits} digits.",
+        "between": "{attribute} must be between {min} and {max}.",
+        "password": "Current password is incorrect.",
+        "image": "{attribute} must be an image file.",
+        "dimensions": "{attribute} has invalid image dimensions.",
+        "size": "{attribute} must not exceed {size} KB.",
+        "mimes": "{attribute} must be a file of type: {values}.",
+        "url": "{attribute} must be a valid URL.",
+        "date": "{attribute} must be a valid date.",
+        "boolean": "{attribute} must be true or false."
+    }
+}

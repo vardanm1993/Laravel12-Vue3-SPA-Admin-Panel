@@ -1,0 +1,158 @@
+{
+    "app": {
+        "title": "Ղեկավարման վահանակ",
+        "welcome": "Բարի գալուստ",
+        "language": "Լեզու",
+        "loading": "Բեռնում...",
+        "search": "Որոնել..."
+    },
+    "nav": {
+        "home": "Գլխավոր",
+        "dashboard": "Վահանակ",
+        "products": "Ապրանքներ",
+        "categories": "Կատեգորիաներ",
+        "users": "Օգտատերեր",
+        "settings": "Կարգավորումներ",
+        "profile": "Պրոֆիլ",
+        "logout": "Ելք",
+        "login": "Մուտք",
+        "register": "Գրանցում"
+    },
+    "admin": {
+        "panel": "Ղեկավարման վահանակ",
+        "dashboard": "Վահանակ",
+        "profile_page": {
+            "title": "Պրոֆիլի կարգավորումներ",
+            "info": "Ձեր անձնական տվյալները",
+            "updated": "Պրոֆիլը հաջողությամբ թարմացվեց։"
+        },
+        "password_page": {
+            "title": "Փոխել գաղտնաբառը",
+            "description": "Թարմացրեք ձեր գաղտնաբառը",
+            "updated": "Գաղտնաբառը հաջողությամբ փոխվեց։"
+        },
+        "delete_page": {
+            "title": "Ջնջել հաշիվը",
+            "warning": "Նշեք, որ այս գործողությունը հնարավոր չէ վերադարձնել։ Ձեր բոլոր տվյալները կջնջվեն։",
+            "confirm": "Այո, ջնջել հաշիվը",
+            "cancel": "Չեղարկել"
+        }
+    },
+    "fields": {
+        "name": "Անուն",
+        "surname": "Ազգանուն",
+        "category": "Կատեգորիա",
+        "email": "Էլ․ հասցե",
+        "password": "Գաղտնաբառ",
+        "current_password": "Ընթացիկ գաղտնաբառ",
+        "new_password": "Նոր գաղտնաբառ",
+        "new_password_confirmation": "Կրկնել նոր գաղտնաբառը",
+        "password_confirmation": "Կրկնել գաղտնաբառը",
+        "title": "Վերնագիր",
+        "color": "Գույն",
+        "description": "Նկարագրություն",
+        "avatar": "Ավատար",
+        "price": "Գին",
+        "quantity": "Քանակ",
+        "slug": "Սլագ",
+        "parent_category": "Վերադաս կատեգորիա",
+        "role": "Դեր",
+        "remember": "Հիշել ինձ"
+    },
+    "buttons": {
+        "submit": "Հաստատել",
+        "cancel": "Չեղարկել",
+        "delete": "Ջնջել",
+        "edit": "Խմբագրել",
+        "save": "Պահպանել",
+        "back": "Հետ",
+        "continue": "Շարունակել",
+        "close": "Փակել",
+        "upload": "Վերբեռնել",
+        "change_avatar": "Փոխել ավատարը",
+        "create": "Ստեղծել",
+        "update": "Թարմացնել"
+    },
+    "auth": {
+        "login": "Մուտք",
+        "register": "Գրանցում",
+        "logout": "Ելք",
+        "remember": "Հիշել ինձ",
+        "forgot": "Մոռացե՞լ եք գաղտնաբառը",
+        "no_account": "Չունե՞ք հաշիվ",
+        "have_account": "Արդեն ունե՞ք հաշիվ",
+        "invalid_credentials": "Սխալ email կամ գաղտնաբառ։",
+        "login_success": "Դուք հաջողությամբ մուտք գործեցիք։",
+        "success_register": "Գրանցումն ավարտված է։",
+        "logout_success": "Դուք դուրս եկաք համակարգից։",
+        "forgot_password": "Մոռացել եք գաղտնաբառը",
+        "send_reset_link": "Ուղարկել հղումը",
+        "back_to_login": "Վերադառնալ մուտք",
+        "reset_password": "Վերականգնել գաղտնաբառը",
+        "reset_link_sent": "Եթե հաշիվը գոյություն ունի, ուղարկել ենք գաղտնաբառի վերականգնման հղումը։",
+        "password_reset_success": "Գաղտնաբառը հաջողությամբ թարմացվեց։",
+        "reset_invalid_token": "Հղումը անվավեր է կամ ժամկետանց։"
+    },
+    "messages": {
+        "success": "Հաջողվեց!",
+        "error": "Սխալ!",
+        "saved": "Պահպանված է։",
+        "updated": "Թարմացված է։",
+        "deleted": "Ջնջված է։",
+        "server_error": "Սերվերի կողմի սխալ․ խնդրում ենք փորձել ավելի ուշ։",
+        "bad_request": "Սխալ հարցում։",
+        "unauthorized": "Մուտք չկա։",
+        "forbidden": "Դուք չեք կարող կատարել այս գործողությունը։",
+        "not_found": "Չի գտնվել։",
+        "unknown_error": "Անհայտ սխալ է տեղի ունեցել։",
+        "profile_updated": "Պրոֆիլը հաջողությամբ թարմացվեց։",
+        "password_updated": "Գաղտնաբառը հաջողությամբ փոխվեց։",
+        "account_deleted": "Ձեր հաշիվը ջնջվել է։",
+        "avatar_updated": "Ավատարը հաջողությամբ թարմացվեց։",
+        "delete_account": "Ջնջել հաշիվը",
+        "delete_account_confirm": "Վստահ ե՞ք, որ ցանկանում եք ջնջել Ձեր հաշիվը։ Գործողությունը վերջնական է և չի կարող հետ վերադարձվել։"
+    },
+    "toasts": {
+        "success": "Հաջողություն",
+        "error": "Սխալ",
+        "info": "Տեղեկություն",
+        "warning": "Զգուշացում"
+    },
+    "roles": {
+        "admin": "Ադմին",
+        "manager": "Մենեջեր",
+        "user": "Օգտատեր"
+    },
+    "crud": {
+        "create_item": "Ստեղծել նոր :item",
+        "edit_item": "Խմբագրել :item",
+        "delete_item": "Ջնջել :item",
+        "item_created": ":item-ը հաջողությամբ ստեղծվեց։",
+        "item_updated": ":item-ը հաջողությամբ թարմացվեց։",
+        "item_deleted": ":item-ը հաջողությամբ ջնջվեց։"
+    },
+    "validation": {
+        "failed": "Վավերացման սխալ։",
+        "required": "{attribute} պարտադիր է։",
+        "string": "{attribute} պետք է լինի տեքստ։",
+        "email": "{attribute} պետք է լինի ճիշտ էլ․ հասցե։",
+        "min": "{attribute} պետք է կազմի նվազագույնը {min} նիշ։",
+        "max": "{attribute} չի կարող լինել ավելի քան {max} նիշ։",
+        "confirmed": "Գաղտնաբառերը չեն համապատասխանում։",
+        "unique": "{attribute} արդեն օգտագործվում է։",
+        "exists": "{attribute} անվավեր է։",
+        "numeric": "{attribute} պետք է լինի թիվ։",
+        "integer": "{attribute} պետք է լինի ամբողջ թիվ։",
+        "digits": "{attribute} պետք է պարունակի {digits} թվանշան։",
+        "between": "{attribute} պետք է լինի {min}-ից {max} սահմաններում։",
+        "password": "Ընթացիկ գաղտնաբառը սխալ է։",
+        "image": "{attribute} պետք է լինի լուսանկար։",
+        "dimensions": "{attribute} ունի անվավեր պատկերի չափեր։",
+        "size": "{attribute} չպետք է գերազանցի {size} KB։",
+        "mimes": "{attribute} պետք է լինի հետևյալ տիպերից՝ {values}։",
+        "url": "{attribute} պետք է լինի ճիշտ հղում։",
+        "date": "{attribute} պետք է լինի ճիշտ ամսաթիվ։",
+        "boolean": "{attribute}-ը պետք է լինի true կամ false։"
+
+    }
+}

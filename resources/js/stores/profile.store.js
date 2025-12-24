@@ -1,0 +1,102 @@
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { useProfileService } from '@/services/profile.service.js'
+import { useToastStore } from '@/stores/toast.store.js'
+import { useAuthStore } from '@/stores/auth.store.js'
+import { useVerificationFlowStore } from '@/stores/verificationFlow.store.js'
+import router from '@/router/index.js'
+
+export const useProfileStore = defineStore('profile', () => {
+    const service = useProfileService()
+    const toast = useToastStore()
+
+    const profile = ref(null)
+    const loading = ref(false)
+    const auth = useAuthStore()
+
+    async function fetchProfile() {
+        loading.value = true
+        try {
+            const res = await service.fetch()
+            profile.value = res.user || null
+        } finally {
+            loading.value = false
+        }
+    }
+
+    async function updateProfile(data) {
+        loading.value = true
+        try {
+            const res = await service.updateProfile(data)
+            profile.value = res.user
+
+            await auth.getUser()
+
+            if (auth.user && !auth.user.email_verified_at) {
+                const flow = useVerificationFlowStore()
+
+                flow.set({
+                    next: { name: 'admin.profile' },
+                    flashKey: 'messages.profile_updated',
+                })
+
+                return router.push({
+                    name: 'admin.verify-email',
+                    query: { verify: 'sent' },
+                })
+            }
+
+            toast.success(res.message_key || 'messages.profile_updated')
+        } finally {
+            loading.value = false
+        }
+    }
+
+    async function updatePassword(data) {
+        loading.value = true
+        try {
+            const res = await service.updatePassword(data)
+            toast.success(res.message_key || 'messages.password_updated')
+        } finally {
+            loading.value = false
+        }
+    }
+
+    async function uploadAvatar(file) {
+        const formData = new FormData()
+        formData.append('avatar', file)
+
+        const res = await service.uploadAvatar(formData)
+
+        if (profile.value) {
+            profile.value.avatar_url = res.avatar_url
+        }
+
+        if (auth.user) {
+            auth.user.avatar_url = res.avatar_url
+        }
+
+        toast.success(res.message_key || 'messages.avatar_updated')
+    }
+
+    async function deleteAccount(data) {
+        loading.value = true
+        try {
+            const res = await service.deleteAccount(data)
+            profile.value = null
+            return res
+        } finally {
+            loading.value = false
+        }
+    }
+
+    return {
+        profile,
+        loading,
+        fetchProfile,
+        updateProfile,
+        updatePassword,
+        uploadAvatar,
+        deleteAccount,
+    }
+})
