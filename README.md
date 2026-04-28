@@ -1,4 +1,4 @@
-# admin-panel-laravel12-vue3
+# Laravel Vue SPA Admin Panel
 Modern SPA Admin Panel built with **Laravel 12** and **Vue 3** — featuring **Sanctum session authentication**, **RBAC (Spatie Permissions)**, **i18n (EN/RU/AM)**, and a reusable **SmartForm** layer powered by **VeeValidate + Yup**.
 
 ---
